@@ -19,7 +19,7 @@ class ToastyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
+        /*registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, p1: Bundle?) {
                 if (activityCounter == 0) {
                     SocketHandler.establishConnection();
@@ -86,7 +86,7 @@ class ToastyApplication : Application() {
                 Log.i("APPLICATION_LIFECYCLE", "onActivityDestroyed")
                 //logEvent("Activity Destroyed: ${activity.localClassName}")
             }
-        })
+        })*/
 
 
     }
