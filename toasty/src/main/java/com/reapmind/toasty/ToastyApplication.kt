@@ -30,7 +30,6 @@ class ToastyApplication : Application() {
 
             override fun onActivityStarted(activity: Activity) {
                 Log.i("APPLICATION_LIFECYCLE", "onActivityStarted${activity.localClassName}")
-                Log.i("APPLICATION_LIFECYCLE", "onActivityStarted${activity.localClassName}")
 
                 val jsonObject = JSONObject()
                 try {
@@ -55,18 +54,18 @@ class ToastyApplication : Application() {
             }
 
             override fun onActivityResumed(activity: Activity) {
-                /*Log.i(
+                Log.i(
                     "APPLICATION_LIFECYCLE",
                     "onActivityResumed${activity.callingActivity.toString()}"
                 )
-                logEvent("Activity Resumed: ${activity.localClassName}")*/
+                //logEvent("Activity Resumed: ${activity.localClassName}")
             }
 
             override fun onActivityPaused(activity: Activity) {
-                /*Log.i(
+                Log.i(
                     "APPLICATION_LIFECYCLE",
                     "onActivityPaused${activity.callingActivity.toString()}"
-                )*/
+                )
                 //logEvent("Activity Paused: ${activity.localClassName}")
             }
 
@@ -84,7 +83,7 @@ class ToastyApplication : Application() {
             }
 
             override fun onActivityDestroyed(activity: Activity) {
-                //Log.i("APPLICATION_LIFECYCLE", "onActivityDestroyed")
+                Log.i("APPLICATION_LIFECYCLE", "onActivityDestroyed")
                 //logEvent("Activity Destroyed: ${activity.localClassName}")
             }
         })
