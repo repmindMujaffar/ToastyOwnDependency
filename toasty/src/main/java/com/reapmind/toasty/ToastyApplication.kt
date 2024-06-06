@@ -17,6 +17,25 @@ class ToastyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
+        unregisterActivityLifecycleCallbacks(object :ActivityLifecycleCallbacks{
+            override fun onActivityCreated(p0: Activity, p1: Bundle?) {
+            }
+            override fun onActivityStarted(p0: Activity) {
+            }
+            override fun onActivityResumed(p0: Activity) {
+            }
+            override fun onActivityPaused(p0: Activity) {
+            }
+            override fun onActivityStopped(p0: Activity) {
+            }
+            override fun onActivitySaveInstanceState(p0: Activity, p1: Bundle) {
+            }
+            override fun onActivityDestroyed(activity: Activity) {
+                Log.i("APPLICATION_LIFECYCLE", "onActivityDestroyed-Event disconnect")
+                Toast.makeText(activity, "Event disconnected", Toast.LENGTH_SHORT).show()
+            }
+
+        })
 
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, p1: Bundle?) {
