@@ -17,6 +17,9 @@ import io.socket.client.IO
 import io.socket.client.Socket
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.OutputStream
+import java.net.URISyntaxException
+import java.net.Socket as JavaSocket
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -44,14 +47,25 @@ object SocketHandler {
 
     private lateinit var mSocket: Socket
     private lateinit var socketStartTime: Date
+    private lateinit var outputStream: OutputStream
+    private lateinit var javaSocket: JavaSocket
 
     fun establishConnection() {
-        val opts = IO.Options()
-        opts.path = "socket.io"
-        mSocket = IO.socket("$SOCKET_URL?userId=${TEST_USER_KEY}")
-        socketStartTime = Calendar.getInstance().time
-        emitDevice()
-        mSocket.connect()
+        try {
+            val opts = IO.Options()
+            opts.path = "socket.io"
+            mSocket = IO.socket("$SOCKET_URL?userId=${TEST_USER_KEY}")
+            javaSocket = JavaSocket(SOCKET_URL, 3000)
+            outputStream = javaSocket.getOutputStream()
+            socketStartTime = Calendar.getInstance().time
+            emitDevice()
+            mSocket.connect()
+        }catch (e: URISyntaxException) {
+            e.printStackTrace()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
     fun socketDisconnect() {
@@ -133,6 +147,17 @@ object SocketHandler {
         val secondsInMilli: Long = 1000
         val elapsedSeconds = different / secondsInMilli
         return elapsedSeconds.toString()
+    }
+
+    fun sendEvent(event: String) {
+        Thread {
+            try {
+                outputStream.write(event.toByteArray())
+                outputStream.flush()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }.start()
     }
 
 }
