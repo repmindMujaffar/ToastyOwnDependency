@@ -19,7 +19,7 @@ class ToastyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        /*registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
+        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, p1: Bundle?) {
                 if (activityCounter == 0) {
                     SocketHandler.establishConnection();
@@ -55,27 +55,27 @@ class ToastyApplication : Application() {
             }
 
             override fun onActivityResumed(activity: Activity) {
-                *//*Log.i(
+                /*Log.i(
                     "APPLICATION_LIFECYCLE",
                     "onActivityResumed${activity.callingActivity.toString()}"
-                )*//*
-                logEvent("Activity Resumed: ${activity.localClassName}")
+                )
+                logEvent("Activity Resumed: ${activity.localClassName}")*/
             }
 
             override fun onActivityPaused(activity: Activity) {
-                *//*Log.i(
+                /*Log.i(
                     "APPLICATION_LIFECYCLE",
                     "onActivityPaused${activity.callingActivity.toString()}"
-                )*//*
-                logEvent("Activity Paused: ${activity.localClassName}")
+                )*/
+                //logEvent("Activity Paused: ${activity.localClassName}")
             }
 
             override fun onActivityStopped(activity: Activity) {
-                logEvent("Activity Stopped: ${activity.localClassName}")
-                *//*activityCounter--
+                //logEvent("Activity Stopped: ${activity.localClassName}")
+                /*activityCounter--
                 if (activityCounter == 0) {
                     SocketHandler.socketDisconnect();
-                }*//*
+                }*/
 
             }
 
@@ -85,9 +85,9 @@ class ToastyApplication : Application() {
 
             override fun onActivityDestroyed(activity: Activity) {
                 //Log.i("APPLICATION_LIFECYCLE", "onActivityDestroyed")
-                logEvent("Activity Destroyed: ${activity.localClassName}")
+                //logEvent("Activity Destroyed: ${activity.localClassName}")
             }
-        })*/
+        })
 
 
     }
