@@ -22,7 +22,7 @@ object ToastyToast {
         application.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, p1: Bundle?) {
                 if (screenCount == 0){
-                    logEvent(activity,"Socket connect")
+                    logEvent(activity,"Socket connect ${activity.localClassName}")
                     firstActivityName = activity.localClassName
                 }
                 screenCount++
