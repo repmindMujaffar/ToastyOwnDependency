@@ -17,11 +17,13 @@ object ToastyToast {
 
     fun initialize(application: Application){
         var screenCount = 0
+        var firstActivityName = ""
 
         application.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, p1: Bundle?) {
                 if (screenCount == 0){
                     logEvent(activity,"Socket connect")
+                    firstActivityName = activity.localClassName
                 }
                 screenCount++
                 trackViews(activity)
@@ -63,7 +65,7 @@ object ToastyToast {
             override fun onActivityStopped(activity: Activity) {
                 //logEvent(activity,"Activity Stopped: ${activity.localClassName}")
                 screenCount--
-                if (screenCount == 0) {
+                if (activity.localClassName == firstActivityName) {
                     logEvent(activity,"Stopped Socket disconnect")
                 }
 
@@ -77,7 +79,7 @@ object ToastyToast {
                 //Log.i("APPLICATION_LIFECYCLE", "onActivityDestroyed")
                 //logEvent(activity,"Activity Destroyed: ${activity.localClassName}")
                 screenCount--
-                if (screenCount==0){
+                if (activity.localClassName == firstActivityName){
                     logEvent(activity,"Destroyed Socket disconnect")
                 }
             }
