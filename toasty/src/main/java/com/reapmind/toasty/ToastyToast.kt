@@ -87,14 +87,7 @@ object ToastyToast {
     }
     private fun logEvent(activity: Activity,event: String) {
         //SocketHandler.sendEvent(event)
-        val view = activity.window.decorView.rootView
-        val resourceId = view.id
-        val resourceName = if (resourceId != View.NO_ID) {
-            view.context.resources.getResourceName(resourceId)
-        } else {
-            "NO_ID"
-        }
-        Toast.makeText(activity,resourceName,Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity,event,Toast.LENGTH_SHORT).show()
     }
     private fun trackViews(activity: Activity) {
         val rootView = activity.window.decorView.rootView
@@ -108,8 +101,17 @@ object ToastyToast {
             }
         }
         view.setOnClickListener {
-            logEvent(activity,"View Clicked: ${view.javaClass.simpleName} with id ${view.id}")
+            val resourceId = view.id
+            val resourceName = if (resourceId != View.NO_ID) {
+                view.context.resources.getResourceName(resourceId)
+            } else {
+                "NO_ID"
+            }
+            clickEvent(activity,"View Clicked: ${view.javaClass.simpleName} with id $resourceName")
         }
+    }
+    private fun clickEvent(activity: Activity,event: String){
+        Toast.makeText(activity,event,Toast.LENGTH_SHORT).show()
     }
 
 }
