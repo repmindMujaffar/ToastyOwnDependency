@@ -103,15 +103,25 @@ object ToastyToast {
         view.setOnClickListener {
             val resourceId = view.id
             val resourceName = if (resourceId != View.NO_ID) {
-                view.context.resources.getResourceName(resourceId)
+                try {
+                    view.context.resources.getResourceName(resourceId)
+                } catch (e: Exception) {
+                    "UNKNOWN_ID"
+                }
             } else {
                 "NO_ID"
             }
-            clickEvent(activity,"View Clicked: ${view.javaClass.simpleName} with id $resourceName")
+            val viewName = view.javaClass.simpleName
+            val activityName = activity.localClassName
+            clickEvent(activity,"View Clicked: $viewName with id $resourceName in activity $activityName")
         }
     }
     private fun clickEvent(activity: Activity,event: String){
         Toast.makeText(activity,event,Toast.LENGTH_SHORT).show()
+    }
+
+    fun viewClickEvent(activity: Activity, btnId:String, userName:String){
+        Toast.makeText(activity,"User Name: $userName with id $btnId ",Toast.LENGTH_SHORT).show()
     }
 
 }
