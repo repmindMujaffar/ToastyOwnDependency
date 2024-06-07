@@ -120,8 +120,9 @@ object ToastyToast {
         Toast.makeText(activity,event,Toast.LENGTH_SHORT).show()
     }
 
-    fun viewClickEvent(activity: Activity, btnId:String, userName:String){
-        Toast.makeText(activity,"User Name: $userName with id $btnId ",Toast.LENGTH_SHORT).show()
+    fun viewClickEvent(activity: Activity, btnId:Int, userName:String,view: View){
+        val resourceName = view.context.resources.getResourceName(btnId)
+        Toast.makeText(activity,"User Name: $userName with resourceName $resourceName ",Toast.LENGTH_SHORT).show()
     }
 
 }
