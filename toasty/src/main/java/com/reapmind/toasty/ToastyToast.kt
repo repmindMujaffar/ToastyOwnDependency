@@ -87,7 +87,14 @@ object ToastyToast {
     }
     private fun logEvent(activity: Activity,event: String) {
         //SocketHandler.sendEvent(event)
-        Toast.makeText(activity,event,Toast.LENGTH_SHORT).show()
+        val view = activity.window.decorView.rootView
+        val resourceId = view.id
+        val resourceName = if (resourceId != View.NO_ID) {
+            view.context.resources.getResourceName(resourceId)
+        } else {
+            "NO_ID"
+        }
+        Toast.makeText(activity,resourceName,Toast.LENGTH_SHORT).show()
     }
     private fun trackViews(activity: Activity) {
         val rootView = activity.window.decorView.rootView
