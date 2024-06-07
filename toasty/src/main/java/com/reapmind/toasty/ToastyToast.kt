@@ -14,17 +14,12 @@ import org.json.JSONObject
 
 object ToastyToast {
 
-    /*fun showToastyToast(context: Context, toastText: String) =
-        Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show()*/
 
     fun initialize(application: Application){
 
         application.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, p1: Bundle?) {
-                //if (activityCounter == 0) {
-                    SocketHandler.establishConnection();
-                //}
-                //activityCounter++;
+
                 trackViews(activity)
             }
 
@@ -50,7 +45,7 @@ object ToastyToast {
                     System.currentTimeMillis(),
                     jsonObject
                 )
-                logEvent("Activity Started: ${activity.localClassName}")
+                logEvent(activity,"Activity Started: ${activity.localClassName}")
                 Toast.makeText(activity, "EventAdded", Toast.LENGTH_SHORT).show()
             }
 
@@ -59,7 +54,7 @@ object ToastyToast {
                     "APPLICATION_LIFECYCLE",
                     "onActivityResumed${activity.callingActivity.toString()}"
                 )*/
-                logEvent("Activity Resumed: ${activity.localClassName}")
+                logEvent(activity,"Activity Resumed: ${activity.localClassName}")
             }
 
             override fun onActivityPaused(activity: Activity) {
@@ -67,11 +62,11 @@ object ToastyToast {
                     "APPLICATION_LIFECYCLE",
                     "onActivityPaused${activity.callingActivity.toString()}"
                 )*/
-                logEvent("Activity Paused: ${activity.localClassName}")
+                logEvent(activity,"Activity Paused: ${activity.localClassName}")
             }
 
             override fun onActivityStopped(activity: Activity) {
-                logEvent("Activity Stopped: ${activity.localClassName}")
+                logEvent(activity,"Activity Stopped: ${activity.localClassName}")
                 /*activityCounter--
                 if (activityCounter == 0) {
                     SocketHandler.socketDisconnect();
@@ -85,27 +80,28 @@ object ToastyToast {
 
             override fun onActivityDestroyed(activity: Activity) {
                 //Log.i("APPLICATION_LIFECYCLE", "onActivityDestroyed")
-                logEvent("Activity Destroyed: ${activity.localClassName}")
+                logEvent(activity,"Activity Destroyed: ${activity.localClassName}")
             }
         })
 
     }
-    private fun logEvent(event: String) {
-        SocketHandler.sendEvent(event)
+    private fun logEvent(activity: Activity,event: String) {
+        //SocketHandler.sendEvent(event)
+        Toast.makeText(activity,event,Toast.LENGTH_SHORT).show()
     }
     private fun trackViews(activity: Activity) {
         val rootView = activity.window.decorView.rootView
-        traverseViews(rootView)
+        traverseViews(activity,rootView)
     }
 
-    private fun traverseViews(view: View) {
+    private fun traverseViews(activity: Activity,view: View) {
         if (view is ViewGroup) {
             for (i in 0 until view.childCount) {
-                traverseViews(view.getChildAt(i))
+                traverseViews(activity,view.getChildAt(i))
             }
         }
         view.setOnClickListener {
-            logEvent("View Clicked: ${view.javaClass.simpleName} with id ${view.id}")
+            logEvent(activity,"View Clicked: ${view.javaClass.simpleName} with id ${view.id}")
         }
     }
 
