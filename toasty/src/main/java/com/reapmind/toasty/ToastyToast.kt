@@ -65,7 +65,7 @@ object ToastyToast {
             override fun onActivityStopped(activity: Activity) {
                 //logEvent(activity,"Activity Stopped: ${activity.localClassName}")
                 screenCount--
-                if (activity.localClassName == firstActivityName) {
+                if (activity.localClassName == firstActivityName && screenCount == 0) {
                     logEvent(activity,"Stopped Socket disconnect")
                 }
 
@@ -79,7 +79,7 @@ object ToastyToast {
                 //Log.i("APPLICATION_LIFECYCLE", "onActivityDestroyed")
                 //logEvent(activity,"Activity Destroyed: ${activity.localClassName}")
                 screenCount--
-                if (activity.localClassName == firstActivityName){
+                if (activity.localClassName == firstActivityName && screenCount == 0){
                     logEvent(activity,"Destroyed Socket disconnect")
                 }
             }
