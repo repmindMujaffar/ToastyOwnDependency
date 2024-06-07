@@ -51,19 +51,19 @@ object ToastyToast {
                     System.currentTimeMillis(),
                     jsonObject
                 )*/
-                //logEvent(activity,"Activity Started: ${activity.localClassName}")
+                logEvent(activity,"Activity Started: ${activity.localClassName}")
             }
 
             override fun onActivityResumed(activity: Activity) {
-                //logEvent(activity,"Activity Resumed: ${activity.localClassName}")
+                logEvent(activity,"Activity Resumed: ${activity.localClassName}")
             }
 
             override fun onActivityPaused(activity: Activity) {
-                //logEvent(activity,"Activity Paused: ${activity.localClassName}")
+                logEvent(activity,"Activity Paused: ${activity.localClassName}")
             }
 
             override fun onActivityStopped(activity: Activity) {
-                //logEvent(activity,"Activity Stopped: ${activity.localClassName}")
+                logEvent(activity,"Activity Stopped: ${activity.localClassName}")
                 screenCount--
                 if (activity.localClassName == firstActivityName && screenCount == 0) {
                     logEvent(activity,"Stopped Socket disconnect")
