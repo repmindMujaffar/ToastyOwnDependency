@@ -26,6 +26,7 @@ object ToastyToast {
                     firstActivityName = activity.localClassName
                 }
                 screenCount++
+                logEvent(activity,"$screenCount")
                 trackViews(activity)
             }
 
@@ -51,27 +52,28 @@ object ToastyToast {
                     System.currentTimeMillis(),
                     jsonObject
                 )*/
-                logEvent(activity,"Activity Started: ${activity.localClassName}")
+                //logEvent(activity,"Activity Started: ${activity.localClassName}")
             }
 
             override fun onActivityResumed(activity: Activity) {
-                logEvent(activity,"Activity Resumed: ${activity.localClassName}")
+                //logEvent(activity,"Activity Resumed: ${activity.localClassName}")
             }
 
             override fun onActivityPaused(activity: Activity) {
-                logEvent(activity,"Activity Paused: ${activity.localClassName}")
-                if (activity.localClassName == firstActivityName /*&& screenCount == 0*/){
+                //logEvent(activity,"Activity Paused: ${activity.localClassName}")
+                /*if (activity.localClassName == firstActivityName *//*&& screenCount == 0*//*){
                     logEvent(activity,"Destroyed Socket disconnect")
                     logEvent(activity,"Activity Destroyed: ${activity.localClassName} $screenCount")
-                }
+                }*/
             }
 
             override fun onActivityStopped(activity: Activity) {
-                logEvent(activity,"Activity Stopped: ${activity.localClassName}")
+                //logEvent(activity,"Activity Stopped: ${activity.localClassName}")
                 screenCount--
-                if (activity.localClassName == firstActivityName && screenCount == 0) {
+                logEvent(activity,"$screenCount")
+                /*if (activity.localClassName == firstActivityName && screenCount == 0) {
                     logEvent(activity,"Stopped Socket disconnect")
-                }
+                }*/
 
             }
 
@@ -80,13 +82,12 @@ object ToastyToast {
             }
 
             override fun onActivityDestroyed(activity: Activity) {
-                //Log.i("APPLICATION_LIFECYCLE", "onActivityDestroyed")
                 //logEvent(activity,"Activity Destroyed: ${activity.localClassName}")
                 screenCount--
-                if (activity.localClassName == firstActivityName /*&& screenCount == 0*/){
+                /*if (activity.localClassName == firstActivityName *//*&& screenCount == 0*//*){
                     logEvent(activity,"Destroyed Socket disconnect")
                     logEvent(activity,"Activity Destroyed: ${activity.localClassName}")
-                }
+                }*/
                 logEvent(activity,"Activity Destroyed12: ${activity.localClassName} $screenCount")
             }
         })
