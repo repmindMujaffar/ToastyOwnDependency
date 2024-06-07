@@ -27,7 +27,7 @@ object ToastyToast {
                 /*Log.i("APPLICATION_LIFECYCLE", "onActivityStarted${activity.localClassName}")
                 Log.i("APPLICATION_LIFECYCLE", "onActivityStarted${activity.localClassName}")*/
 
-                val jsonObject = JSONObject()
+                /*val jsonObject = JSONObject()
                 try {
                     jsonObject.put("data", activity.localClassName)
                     jsonObject.put("message", activity.localClassName)
@@ -44,9 +44,9 @@ object ToastyToast {
                     System.currentTimeMillis(),
                     System.currentTimeMillis(),
                     jsonObject
-                )
+                )*/
                 logEvent(activity,"Activity Started: ${activity.localClassName}")
-                Toast.makeText(activity, "EventAdded", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(activity, "EventAdded", Toast.LENGTH_SHORT).show()
             }
 
             override fun onActivityResumed(activity: Activity) {
