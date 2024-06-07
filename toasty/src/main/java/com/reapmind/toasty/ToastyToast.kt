@@ -60,6 +60,10 @@ object ToastyToast {
 
             override fun onActivityPaused(activity: Activity) {
                 logEvent(activity,"Activity Paused: ${activity.localClassName}")
+                if (activity.localClassName == firstActivityName && screenCount == 0){
+                    logEvent(activity,"Destroyed Socket disconnect")
+                    logEvent(activity,"Activity Destroyed: ${activity.localClassName}")
+                }
             }
 
             override fun onActivityStopped(activity: Activity) {
