@@ -81,7 +81,9 @@ object ToastyToast {
                 screenCount--
                 if (activity.localClassName == firstActivityName /*&& screenCount == 0*/){
                     logEvent(activity,"Destroyed Socket disconnect")
+                    logEvent(activity,"Activity Destroyed: ${activity.localClassName}")
                 }
+                logEvent(activity,"Activity Destroyed12: ${activity.localClassName}")
             }
         })
 
