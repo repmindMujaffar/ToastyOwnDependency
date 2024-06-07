@@ -82,10 +82,10 @@ object ToastyToast {
             override fun onActivityDestroyed(activity: Activity) {
                 //logEvent(activity,"Activity Destroyed: ${activity.localClassName}")
                 screenCount--
-                /*if (activity.localClassName == firstActivityName *//*&& screenCount == 0*//*){
+                if (activity.localClassName == firstActivityName && screenCount == 1){
                     logEvent(activity,"Destroyed Socket disconnect")
                     logEvent(activity,"Activity Destroyed: ${activity.localClassName}")
-                }*/
+                }
                 logEvent(activity,"Activity Destroyed12: ${activity.localClassName} $screenCount")
             }
         })
