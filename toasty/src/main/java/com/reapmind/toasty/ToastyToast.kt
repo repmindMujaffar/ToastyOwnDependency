@@ -69,8 +69,6 @@ object ToastyToast {
 
             override fun onActivityStopped(activity: Activity) {
                 //logEvent(activity,"Activity Stopped: ${activity.localClassName}")
-                screenCount--
-                logEvent(activity,"$screenCount")
                 /*if (activity.localClassName == firstActivityName && screenCount == 0) {
                     logEvent(activity,"Stopped Socket disconnect")
                 }*/
