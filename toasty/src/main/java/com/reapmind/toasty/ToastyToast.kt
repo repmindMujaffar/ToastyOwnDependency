@@ -123,6 +123,8 @@ object ToastyToast {
     fun viewClickEvent(activity: Activity, btnId:Int, userName:String,view: View){
         val resourceName = view.context.resources.getResourceName(btnId)
         Toast.makeText(activity,"User Name: $userName with resourceName $resourceName ",Toast.LENGTH_SHORT).show()
+        Log.i("asdfviewType", view.toString())
+        Log.i("asdfviewid", view.context.resources.getResourceName(btnId))
     }
 
 }
