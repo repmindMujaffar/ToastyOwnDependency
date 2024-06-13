@@ -133,4 +133,15 @@ object ToastyToast {
         Log.i("asdfviewid", view.context.resources.getResourceName(btnId))
     }
 
+    fun changeUserLoggedIn(event: String,jsonObject: JSONObject){
+        //SocketHandler.changeUserLoggedIn(event,jsonObject)
+        Log.i("changeUserLoggedIn","$event - $jsonObject")
+    }
+    fun screenChange(event: String, jsonObject: JSONObject){
+        SocketHandler.screenChange(event,jsonObject)
+    }
+    fun viewClicked(event: String, jsonObject: JSONObject){
+        SocketHandler.viewClicked(event,jsonObject)
+    }
+
 }

@@ -160,4 +160,16 @@ object SocketHandler {
         }.start()
     }
 
+    fun changeUserLoggedIn(event: String, jsonObject: JSONObject) {
+
+    }
+
+    fun screenChange(event: String, jsonObject: JSONObject) {
+
+    }
+
+    fun viewClicked(event: String, jsonObject: JSONObject) {
+
+    }
+
 }
