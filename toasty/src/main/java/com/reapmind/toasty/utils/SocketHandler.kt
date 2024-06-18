@@ -1,6 +1,8 @@
 package com.reapmind.toasty.utils
 
+import android.content.Context
 import android.os.Build
+import com.google.gson.JsonParser
 import com.reapmind.toasty.utils.Constants.DATE_TIME_FORMAT
 import com.reapmind.toasty.utils.Constants.DEVICE
 import com.reapmind.toasty.utils.Constants.END_TIME
@@ -45,13 +47,18 @@ const val PLATFORM_ANDROID: String = "Android"
 
 object SocketHandler {
 
+
     private lateinit var mSocket: Socket
     private lateinit var socketStartTime: Date
     private lateinit var outputStream: OutputStream
     private lateinit var javaSocket: JavaSocket
+    private var KEY: String = "KEY"//connection establish key
+    private lateinit var sessionManager: SessionManager
 
-    fun establishConnection() {
+
+    fun establishConnection(key: String) {
         try {
+            KEY = key
             val opts = IO.Options()
             opts.path = "socket.io"
             mSocket = IO.socket("$SOCKET_URL?userId=${TEST_USER_KEY}")
@@ -60,11 +67,16 @@ object SocketHandler {
             socketStartTime = Calendar.getInstance().time
             emitDevice()
             mSocket.connect()
+            onTrack("session")
         }catch (e: URISyntaxException) {
             e.printStackTrace()
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
+    }
+    fun initialize(context: Context) {
+        this.sessionManager = SessionManager(context)
 
     }
 
@@ -159,17 +171,17 @@ object SocketHandler {
             }
         }.start()
     }
-
-    fun changeUserLoggedIn(event: String, jsonObject: JSONObject) {
-
-    }
-
-    fun screenChange(event: String, jsonObject: JSONObject) {
-
-    }
-
-    fun viewClicked(event: String, jsonObject: JSONObject) {
-
+    fun onTrack(eventName: String) {
+        mSocket.on(eventName) {
+            try {
+                val jsonObject = JSONObject(JsonParser.parseString(it[0].toString()).toString())
+                this.sessionManager.saveSessionId(jsonObject.getString("sessionId"))
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+        }.on(Socket.EVENT_CONNECT_ERROR) {
+            println("Connection error: ${it[0]}")
+        }
     }
 
 }

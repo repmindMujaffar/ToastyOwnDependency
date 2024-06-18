@@ -21,13 +21,20 @@ object ToastyToast {
 
         application.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, p1: Bundle?) {
-                if (screenCount == 0){
+
+                /*if (screenCount == 0) {
+                    socketHandler.establishConnection();
+                }
+                socketHandler.onTrack("session")
+                screenCount++;*/
+
+                /*if (screenCount == 0){
                     logEvent(activity,"Socket connect ${activity.localClassName}")
                     firstActivityName = activity.localClassName
                 }
                 screenCount++
                 logEvent(activity,"$screenCount")
-                trackViews(activity)
+                trackViews(activity)*/
             }
 
             override fun onActivityStarted(activity: Activity) {
@@ -133,7 +140,7 @@ object ToastyToast {
         Log.i("asdfviewid", view.context.resources.getResourceName(btnId))
     }
 
-    fun changeUserLoggedIn(event: String,jsonObject: JSONObject){
+    /*fun changeUserLoggedIn(event: String,jsonObject: JSONObject){
         //SocketHandler.changeUserLoggedIn(event,jsonObject)
         Log.i("changeUserLoggedIn","$event - $jsonObject")
     }
@@ -142,6 +149,6 @@ object ToastyToast {
     }
     fun viewClicked(event: String, jsonObject: JSONObject){
         SocketHandler.viewClicked(event,jsonObject)
-    }
+    }*/
 
 }
