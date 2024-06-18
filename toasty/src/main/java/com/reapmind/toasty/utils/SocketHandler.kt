@@ -183,5 +183,8 @@ object SocketHandler {
             println("Connection error: ${it[0]}")
         }
     }
+    fun getSessionId() : String?{
+        return this.sessionManager.getSessionId()
+    }
 
 }
