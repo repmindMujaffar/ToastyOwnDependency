@@ -63,8 +63,8 @@ object SocketHandler {
             val opts = IO.Options()
             opts.path = "socket.io"
             mSocket = IO.socket("$SOCKET_URL?userId=${TEST_USER_KEY}")
-            javaSocket = JavaSocket(SOCKET_URL, 3000)
-            outputStream = javaSocket.getOutputStream()
+            /*javaSocket = JavaSocket(SOCKET_URL, 3000)
+            outputStream = javaSocket.getOutputStream()*/
             socketStartTime = Calendar.getInstance().time
             emitDevice()
             mSocket.connect()
