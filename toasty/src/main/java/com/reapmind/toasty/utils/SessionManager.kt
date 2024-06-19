@@ -9,6 +9,7 @@ class SessionManager(context: Context) {
 
     companion object{
         const val SESSION_ID = "session_id"
+        const val KEY = "key"
     }
     fun saveSessionId(sessionId: String) {
         val editor = prefs.edit()
@@ -18,5 +19,14 @@ class SessionManager(context: Context) {
 
     fun getSessionId(): String? {
         return prefs.getString(SESSION_ID, null)
+    }
+
+    fun saveKey(key:String){
+        val editor = prefs.edit()
+        editor.putString(KEY,key)
+        editor.apply()
+    }
+    fun getKey():String?{
+        return prefs.getString(KEY, null)
     }
 }

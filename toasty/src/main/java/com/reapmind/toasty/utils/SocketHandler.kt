@@ -2,6 +2,7 @@ package com.reapmind.toasty.utils
 
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import com.google.gson.JsonParser
 import com.reapmind.toasty.utils.Constants.DATE_TIME_FORMAT
 import com.reapmind.toasty.utils.Constants.DEVICE
@@ -67,6 +68,7 @@ object SocketHandler {
             socketStartTime = Calendar.getInstance().time
             emitDevice()
             mSocket.connect()
+            this.sessionManager.saveKey(key)
             onTrack("session")
         }catch (e: URISyntaxException) {
             e.printStackTrace()
@@ -185,6 +187,9 @@ object SocketHandler {
     }
     fun getSessionId() : String?{
         return this.sessionManager.getSessionId()
+    }
+    fun getKey():String?{
+        return this.sessionManager.getKey()
     }
 
 }
