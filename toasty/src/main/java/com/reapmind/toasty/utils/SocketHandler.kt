@@ -70,10 +70,13 @@ object SocketHandler {
             mSocket.connect()
             this.sessionManager.saveKey(key)
             onTrack("session")
+            Log.i("SocketConnect123","Connected")
         }catch (e: URISyntaxException) {
             e.printStackTrace()
+            Log.i("SocketConnect123",e.message.toString())
         } catch (e: Exception) {
             e.printStackTrace()
+            Log.i("SocketConnect1234",e.message.toString())
         }
 
     }
