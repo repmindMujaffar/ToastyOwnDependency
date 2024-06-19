@@ -30,7 +30,7 @@ import java.util.Locale
 
 const val NEW_USER_KEY: String = ""
 const val TEST_USER_KEY: String = "TEST_USER_KEY"
-const val TEST_SESSION_ID: String = "TEST_SESSION_ID"
+var TEST_SESSION_ID: String = "TEST_SESSION_ID"
 
 const val APPLICATION: String = "Application"
 const val APPLICATION_OPEN: String = "ApplicationOpen"
@@ -66,10 +66,11 @@ object SocketHandler {
             /*javaSocket = JavaSocket(SOCKET_URL, 3000)
             outputStream = javaSocket.getOutputStream()*/
             socketStartTime = Calendar.getInstance().time
-            emitDevice()
+
             mSocket.connect()
             this.sessionManager.saveKey(key)
             onTrack("session")
+            emitDevice()
             Log.i("SocketConnect123","Connected")
         }catch (e: URISyntaxException) {
             e.printStackTrace()
@@ -181,6 +182,7 @@ object SocketHandler {
             try {
                 val jsonObject = JSONObject(JsonParser.parseString(it[0].toString()).toString())
                 this.sessionManager.saveSessionId(jsonObject.getString("sessionId"))
+                TEST_SESSION_ID = jsonObject.getString("sessionId")
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
